@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>DropLister Pro</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <div id="app">
+    <header>
+      <div class="logo-row">
+        <div class="logo-icon">DL</div>
+        <div>
+          <h1>DropLister Pro</h1>
+          <span class="version">v1.0.0 - Unlimited</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- Tab Navigation -->
+    <nav class="tabs">
+      <button class="tab active" data-tab="settings">Settings</button>
+      <button class="tab" data-tab="bulk">Bulk Lister</button>
+      <button class="tab" data-tab="tools">Tools</button>
+    </nav>
+
+    <!-- Settings Tab -->
+    <div class="tab-content active" id="tab-settings">
+      <section class="card">
+        <h3>Pricing</h3>
+        <div class="form-row">
+          <label>Markup %</label>
+          <input type="number" id="markupPercent" min="0" step="1" value="30">
+        </div>
+        <div class="form-row">
+          <label>End Price</label>
+          <input type="number" id="endPrice" min="0" max="0.99" step="0.01" value="0.99">
+        </div>
+        <div class="form-row">
+          <label>Min Price</label>
+          <input type="number" id="minPrice" min="0" step="1" value="0">
+        </div>
+        <div class="form-row">
+          <label>Max Price</label>
+          <input type="number" id="maxPrice" min="0" step="1" value="999">
+        </div>
+        <div class="form-row">
+          <label>Promoted Ad Rate %</label>
+          <input type="number" id="promotedRate" min="0" max="99" step="0.1" value="2.1">
+        </div>
+      </section>
+
+      <section class="card">
+        <h3>eBay Domain</h3>
+        <div class="form-row">
+          <label>Target Market</label>
+          <select id="domain">
+            <option value="com">USA (.com)</option>
+            <option value="ca">Canada (.ca)</option>
+            <option value="co.uk">UK (.co.uk)</option>
+            <option value="com.au">Australia (.com.au)</option>
+            <option value="de">Germany (.de)</option>
+            <option value="fr">France (.fr)</option>
+            <option value="it">Italy (.it)</option>
+            <option value="es">Spain (.es)</option>
+            <option value="nl">Netherlands (.nl)</option>
+          </select>
+        </div>
+      </section>
+
+      <section class="card">
+        <h3>Features</h3>
+        <div class="toggle-row">
+          <span>VeRO Protection</span>
+          <label class="switch"><input type="checkbox" id="veroEnabled" checked><span class="slider"></span></label>
+        </div>
+        <div class="toggle-row">
+          <span>Auto Submit Listing</span>
+          <label class="switch"><input type="checkbox" id="autoSubmit"><span class="slider"></span></label>
+        </div>
+        <div class="toggle-row">
+          <span>Simple Description</span>
+          <label class="switch"><input type="checkbox" id="useSimpleDesc"><span class="slider"></span></label>
+        </div>
+        <div class="toggle-row">
+          <span>Use Image Template</span>
+          <label class="switch"><input type="checkbox" id="useImageTemplate"><span class="slider"></span></label>
+        </div>
+        <div class="toggle-row">
+          <span>Use Review Images</span>
+          <label class="switch"><input type="checkbox" id="useReviewImages"><span class="slider"></span></label>
+        </div>
+        <div class="toggle-row">
+          <span>Fill Required Specifics (AI)</span>
+          <label class="switch"><input type="checkbox" id="fillRequiredSpecifics" checked><span class="slider"></span></label>
+        </div>
+        <div class="toggle-row">
+          <span>Fill Optional Specifics (AI)</span>
+          <label class="switch"><input type="checkbox" id="fillOptionalSpecifics" checked><span class="slider"></span></label>
+        </div>
+      </section>
+
+      <section class="card">
+        <h3>AI Provider</h3>
+        <div class="form-row">
+          <label>Provider</label>
+          <select id="aiProvider">
+            <option value="gemini">Google Gemini</option>
+            <option value="openai">OpenAI</option>
+          </select>
+        </div>
+        <div class="form-row" id="geminiKeyRow">
+          <label>Gemini API Key</label>
+          <input type="password" id="geminiApiKey" placeholder="Enter Gemini API Key">
+        </div>
+        <div class="form-row" id="openaiKeyRow" style="display:none">
+          <label>OpenAI API Key</label>
+          <input type="password" id="openaiApiKey" placeholder="Enter OpenAI API Key">
+        </div>
+      </section>
+
+      <section class="card">
+        <h3>Watermark</h3>
+        <div class="form-row">
+          <label>Image URL</label>
+          <input type="text" id="watermarkUrl" placeholder="Enter watermark image URL">
+        </div>
+        <div id="watermarkPreview" class="watermark-preview"></div>
+      </section>
+
+      <button id="saveSettings" class="btn-primary">Save Settings</button>
+      <button id="openOptions" class="btn-secondary">Advanced Options</button>
+    </div>
+
+    <!-- Bulk Lister Tab -->
+    <div class="tab-content" id="tab-bulk">
+      <section class="card">
+        <h3>Bulk List</h3>
+        <p class="hint">Enter Amazon product links, one per line:</p>
+        <textarea id="bulkLinks" rows="8" placeholder="https://www.amazon.com/dp/B0XXXXX&#10;https://www.amazon.com/dp/B0YYYYY"></textarea>
+        <div class="form-row">
+          <label>Threads</label>
+          <select id="threadCount">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="5">5</option>
+            <option value="10">10</option>
+            <option value="15">15</option>
+            <option value="20">20</option>
+            <option value="30">30</option>
+          </select>
+        </div>
+        <div class="btn-row">
+          <button id="startBulk" class="btn-primary">Start Listing</button>
+          <button id="pauseBulk" class="btn-secondary" disabled>Pause</button>
+          <button id="resumeBulk" class="btn-secondary" disabled>Resume</button>
+          <button id="stopBulk" class="btn-danger" disabled>Stop</button>
+        </div>
+      </section>
+
+      <section class="card" id="bulkStatusCard" style="display:none">
+        <h3>Progress</h3>
+        <div class="progress-bar"><div class="progress-fill" id="bulkProgress"></div></div>
+        <div id="bulkStatusText" class="status-text">0 / 0</div>
+        <div id="bulkResults" class="results-list"></div>
+      </section>
+
+      <section class="card">
+        <h3>Amazon Search</h3>
+        <p class="hint">Enter search queries, one per line. Extension will find products and list them:</p>
+        <textarea id="searchQueries" rows="4" placeholder="wireless earbuds&#10;phone case iphone 15"></textarea>
+        <div class="form-row">
+          <label>ASINs per Search</label>
+          <input type="number" id="asinsPerSearch" min="1" max="50" value="5">
+        </div>
+        <button id="searchAndList" class="btn-primary">Search & List</button>
+      </section>
+    </div>
+
+    <!-- Tools Tab -->
+    <div class="tab-content" id="tab-tools">
+      <section class="card">
+        <h3>Quick Actions</h3>
+        <div class="tools-grid">
+          <button class="tool-btn" id="btnDuplicateChecker">Duplicate Checker</button>
+          <button class="tool-btn" id="btnCompetitorResearch">Competitor Research</button>
+          <button class="tool-btn" id="btnBoostListings">Boost Listings</button>
+          <button class="tool-btn" id="btnProductFinder">Product Finder</button>
+        </div>
+      </section>
+
+      <section class="card">
+        <h3>SKU Management</h3>
+        <div id="skuCount" class="sku-count">Listed SKUs: 0</div>
+        <div class="btn-row">
+          <button id="exportSkus" class="btn-secondary">Export SKUs</button>
+          <button id="importSkus" class="btn-secondary">Import SKUs</button>
+          <button id="clearSkus" class="btn-danger">Clear All</button>
+        </div>
+        <input type="file" id="skuFileInput" accept=".txt,.csv" style="display:none">
+      </section>
+
+      <section class="card">
+        <h3>VeRO Brands</h3>
+        <div id="veroCount" class="sku-count">VeRO Brands: 0</div>
+        <div class="btn-row">
+          <button id="loadDefaultVero" class="btn-secondary">Load Default List</button>
+          <button id="importVero" class="btn-secondary">Import List</button>
+          <button id="clearVero" class="btn-danger">Clear</button>
+        </div>
+        <input type="file" id="veroFileInput" accept=".txt,.csv" style="display:none">
+      </section>
+    </div>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>
