@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+  body { font-family: Arial, Helvetica, sans-serif; color: #333; max-width: 800px; margin: 0 auto; padding: 16px; }
+  .header { text-align: center; margin-bottom: 20px; padding-bottom: 16px; border-bottom: 2px solid #6366f1; }
+  .header h1 { font-size: 22px; color: #1f2937; margin: 0 0 8px 0; }
+  .features { margin: 16px 0; }
+  .features h2 { font-size: 16px; color: #6366f1; margin-bottom: 10px; }
+  .features ul { padding-left: 20px; }
+  .features li { margin-bottom: 6px; line-height: 1.5; }
+  .specs { margin: 16px 0; }
+  .specs table { width: 100%; border-collapse: collapse; }
+  .specs th, .specs td { padding: 8px 12px; text-align: left; border-bottom: 1px solid #e5e7eb; }
+  .specs th { background: #f3f4f6; font-weight: 600; width: 35%; }
+  .included { margin: 16px 0; padding: 12px; background: #f0fdf4; border-radius: 8px; border: 1px solid #bbf7d0; }
+  .included h2 { font-size: 16px; color: #15803d; margin-bottom: 8px; }
+  .footer { margin-top: 24px; padding-top: 16px; border-top: 1px solid #e5e7eb; text-align: center; font-size: 12px; color: #9ca3af; }
+  .shipping { margin: 16px 0; padding: 12px; background: #eff6ff; border-radius: 8px; border: 1px solid #bfdbfe; }
+  .shipping h2 { font-size: 16px; color: #1d4ed8; margin-bottom: 8px; }
+</style>
+</head>
+<body>
+  <div class="header">
+    <h1>{{TITLE}}</h1>
+    <p>{{SUBTITLE}}</p>
+  </div>
+
+  <div class="features">
+    <h2>Key Features</h2>
+    <ul>
+      {{FEATURES}}
+    </ul>
+  </div>
+
+  <div class="specs">
+    <h2>Specifications</h2>
+    <table>
+      {{SPECS}}
+    </table>
+  </div>
+
+  <div class="included">
+    <h2>What's Included</h2>
+    <ul>
+      {{INCLUDED}}
+    </ul>
+  </div>
+
+  <div class="shipping">
+    <h2>Shipping & Handling</h2>
+    <p>We ship within 1-3 business days. All items are carefully packaged to ensure safe delivery.</p>
+  </div>
+
+  <div class="footer">
+    <p>Thank you for shopping with us! If you have any questions, please message us before purchasing.</p>
+  </div>
+</body>
+</html>

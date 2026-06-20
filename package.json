@@ -1,0 +1,22 @@
+{
+  "name": "ebay-lister",
+  "version": "1.0.0",
+  "main": "background.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "copy-webpack-plugin": "^14.0.0",
+    "javascript-obfuscator": "^5.4.3",
+    "webpack": "^5.107.2",
+    "webpack-cli": "^7.0.3",
+    "webpack-obfuscator": "^3.6.1"
+  }
+}
